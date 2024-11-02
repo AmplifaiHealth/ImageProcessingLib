@@ -45,17 +45,22 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            register<MavenPublication>("release") {
-                groupId = "com.amplifaihealth"
-                artifactId = "imageprocessinglib"
-                version = "0.0.1-alpha"
-                artifact("$buildDir/outputs/aar/imageProcessingLib-release.aar")
-                afterEvaluate {
-                    from(components["release"])
-                }
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.amplifaihealth"
+            artifactId = "imageprocessinglib"
+            version = "0.0.1-alpha"
+            artifact("$buildDir/outputs/aar/imageprocessinglib-release.aar")
+        }
+    }
+    repositories {
+        maven {
+            name = "GithubPackages"
+            url = uri("https://maven.pkg.github.com/AmplifaiHealth/ImageProcessingLib")
+            credentials {
+                username = "AmplifaiHealth"
+                password = "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"
             }
         }
     }
